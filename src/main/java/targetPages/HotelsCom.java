@@ -6,24 +6,30 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 public class HotelsCom  {
 
     public void printResults() {
-        Document doc;
+
+
+
+
+        final String query = "Αθήνα";
+
+        Document page;
 
         {
             try {
-                doc = Jsoup.connect("https://en.wikipedia.org/").get();
-                Elements newsHeadlines = doc.select("#mp-itn b a");
-                for (Element element : newsHeadlines) {
-                    System.out.println(newsHeadlines.text());
+                page = Jsoup.connect("https://el.hotels.com/search.do?q-destination=" + URLEncoder.encode(query,"UTF-8")).get();
+
+
+                for (Element searchResult: page.select("h3.p-name a")) {
+                    final String title = searchResult.text();
+
+                    System.out.println(title);
                 }
 
-
-                System.out.println("-----------------------------------------------------");
-
-                System.out.println(doc.outerHtml());
 
 
             } catch (IOException e) {

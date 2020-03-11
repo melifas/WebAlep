@@ -28,15 +28,5 @@ public class DbUtil {
                 }
             }
 
-
-        /*Connection con = null;
-        try {
-            Class.forName("org.sqlite.JDBC");
-           con = DriverManager.getConnection("jdbc:sqlite:dbScrapp");
-            System.out.println("Connection ok");
-        } catch (ClassNotFoundException |SQLException e) {
-            e.getMessage();
-        }
-        return  con;*/
     }
 }
