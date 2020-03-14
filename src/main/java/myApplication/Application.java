@@ -8,6 +8,8 @@ import targetPages.ekdromiGr;
 import targetPages.xenodoxeioGr;
 
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Application {
 
@@ -53,9 +55,16 @@ public class Application {
             }*/
 
 
-            //DbUtil.connect();
-            System.out.println("-------------------------------------------");
 
+        System.out.println("Αποτελέσματα απο xenodoxeia.gr");
+        xenodoxeioGr xenodoxeio = new xenodoxeioGr();
+        xenodoxeio.printResults();
+        System.out.println("--------------------------------------");
+
+        System.out.println("Αποτελέσματα απο dealSafari.gr");
+        dealSagariGr dealsafari = new dealSagariGr();
+        dealsafari.printResults();
+        System.out.println("-------------------------------------------");
             System.out.println("Αποτελέσματα απο ekdromi.gr");
             ekdromiGr ekdromi = new ekdromiGr();
             ekdromi.printResults();
@@ -68,17 +77,10 @@ public class Application {
 
             System.out.println("--------------------------------------");
 
-            System.out.println("Αποτελέσματα απο xenodoxeia.com");
+        //DbUtil.connect();
 
-            xenodoxeioGr xenodoxeio = new xenodoxeioGr();
-            xenodoxeio.printResults();
 
-            System.out.println("--------------------------------------");
-
-            System.out.println("Αποτελέσματα απο dealSafari.gr");
-            dealSagariGr dealsafari = new dealSagariGr();
-            dealsafari.printResults();
-        }
+     }
     }
    /* //-----------Μέθοδος εκτύπωσης διαθέσιμων λειτουργιών προς τον χρήστη--------
     private static void printActions () {

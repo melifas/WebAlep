@@ -11,7 +11,7 @@ import java.net.URLEncoder;
 public class HotelsCom  {
 
     public void printResults() {
-        final String query = "Αττική";
+        final String query = "Αθήνα";
         Document page;
         {
             try {
