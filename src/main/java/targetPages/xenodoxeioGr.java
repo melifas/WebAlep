@@ -8,16 +8,18 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.net.URLEncoder;
 
-public class xenodoxeioGr {
-    public void printResults() {
-        final String query = "Αττική";
+// η ημερομηνία αποθηκεύεται σε cookie
+public class xenodoxeioGr implements Runnable {
+    public void run() {
+        final String query = "Αθήνα";
+        final String date = "2020-03-15";
         Document page;
         {
             try {
-                page = Jsoup.connect("https://www.xenodoxeio.gr/search?locations[]=" + URLEncoder.encode(query,"UTF-8")).get();
+                page = Jsoup.connect("https://www.xenodoxeio.gr/search?search_term=" + URLEncoder.encode(query,"UTF-8")+"&checkin"+URLEncoder.encode(date,"UTF-8")).get();
 
 
-                Elements hotelNames = page.select("p.main-deal-hotel-name a");
+                Elements hotelNames = page.getElementsByClass("main-deal-hotel-name");
                 Elements hotelPrice = page.getElementsByClass("main-deal-final-price palette-light");
 
 

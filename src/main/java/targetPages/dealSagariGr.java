@@ -8,8 +8,11 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.net.URLEncoder;
 
-public class dealSagariGr {
-    public void printResults() {
+
+
+//δεν χρησιμοποιεί ημερομηνία για τις αναζητήσεις
+public class dealSagariGr implements Runnable {
+    public void run() {
         final String query = "Αττική";
         Document page;
         {

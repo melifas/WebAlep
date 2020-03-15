@@ -16,6 +16,7 @@ public class Application {
     static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
+        DbUtil.connect();
 
        /* boolean quit = false;
         printActions();
@@ -55,7 +56,31 @@ public class Application {
             }*/
 
 
+       Thread dealSafariThread = new Thread(new dealSagariGr());
+        Thread ekdromiGr = new Thread(new ekdromiGr());
+        Thread xenodoxeioGr = new Thread(new xenodoxeioGr());
+        Thread hotelsGr = new Thread(new HotelsCom());
 
+        dealSafariThread.start();
+        ekdromiGr.start();
+        xenodoxeioGr.start();
+        hotelsGr.start();
+
+       /* System.out.println("Αποτελέσματα απο Hotels.com");
+        HotelsCom hotelsCom = new HotelsCom();
+        hotelsCom.printResults();
+
+        System.out.println("--------------------------------------");
+
+
+
+
+
+        System.out.println("Αποτελέσματα απο ekdromi.gr");
+        ekdromiGr ekdromi = new ekdromiGr();
+        ekdromi.printResults();
+
+        System.out.println("-------------------------------------------");
         System.out.println("Αποτελέσματα απο xenodoxeia.gr");
         xenodoxeioGr xenodoxeio = new xenodoxeioGr();
         xenodoxeio.printResults();
@@ -65,19 +90,8 @@ public class Application {
         dealSagariGr dealsafari = new dealSagariGr();
         dealsafari.printResults();
         System.out.println("-------------------------------------------");
-            System.out.println("Αποτελέσματα απο ekdromi.gr");
-            ekdromiGr ekdromi = new ekdromiGr();
-            ekdromi.printResults();
 
-            System.out.println("-------------------------------------------");
-
-            System.out.println("Αποτελέσματα απο Hotels.com");
-            HotelsCom hotelsCom = new HotelsCom();
-            hotelsCom.printResults();
-
-            System.out.println("--------------------------------------");
-
-        //DbUtil.connect();
+*/
 
 
      }
