@@ -22,14 +22,15 @@ public class xenodoxeioGr implements Runnable {
                 Elements hotelNames = page.getElementsByClass("main-deal-hotel-name");
                 Elements hotelPrice = page.getElementsByClass("main-deal-final-price palette-light");
 
-
+                System.out.println("--------------------------------------");
+                System.out.println("Αποτελέσματα απο xenodoxeioGr");
                 for (int i =0; i< hotelNames.size(); i++){
                     String names = hotelNames.get(i).text().trim();
                     String priceString = hotelPrice.get(i).text();
                     //double price = Double.parseDouble(priceString);
                     System.out.println("| " + names  + " | " + priceString);
                 }
-
+                System.out.println("--------------------------------------");
                 /*for (Element searchResult: page.select("p.main-deal-hotel-name a")) {
                     final String title = searchResult.text();
 

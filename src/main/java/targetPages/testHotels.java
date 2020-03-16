@@ -8,9 +8,8 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.net.URLEncoder;
 
-public class HotelsCom implements Runnable  {
-
-    public void run() {
+public class testHotels {
+    public void print() {
         final String query = "Αθήνα";
         final String startdate = "2020-03-15";
         //TODO Να βρώ ενα τρόπο να αυξανω την ημερομηνια κατα 1
@@ -20,13 +19,13 @@ public class HotelsCom implements Runnable  {
         {
             try {
                 page = Jsoup.connect("https://el.hotels.com/search.do?q-destination=" + URLEncoder.encode(query,"UTF-8")+"&q-check-in="+ URLEncoder.encode(startdate,"UTF-8")
-                    +"&q-check-out="+URLEncoder.encode(enddate,"UTF-8") + "&q-rooms=1&q-room-0-adults=1&q-room-0-children=0"
+                        +"&q-check-out="+URLEncoder.encode(enddate,"UTF-8") + "&q-rooms=1&q-room-0-adults=1&q-room-0-children=0"
                 ).get();
 
                 //page = Jsoup.connect("https://el.hotels.com/search.do?q-destination = Αθήνα").get();
 
-                Elements hotelNames = page.getElementsByClass("h3.p-name a");
-                Elements hotelPrice = page.getElementsByClass("price-link");
+                Elements hotelNames = page.getElementsByClass("property-name-link");
+                Elements hotelPrice = page.select("[class=price]");
                 System.out.println("--------------------------------------");
                 System.out.println("Αποτελέσματα απο HotelGr");
                 for (int i =0; i< hotelNames.size(); i++){
@@ -51,4 +50,3 @@ public class HotelsCom implements Runnable  {
         }
     }
 }
-

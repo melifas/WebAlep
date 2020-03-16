@@ -2,10 +2,7 @@ package myApplication;
 
 import DbUtil.DbUtil;
 import org.w3c.dom.ls.LSOutput;
-import targetPages.HotelsCom;
-import targetPages.dealSagariGr;
-import targetPages.ekdromiGr;
-import targetPages.xenodoxeioGr;
+import targetPages.*;
 
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
@@ -56,7 +53,7 @@ public class Application {
             }*/
 
 
-       Thread dealSafariThread = new Thread(new dealSagariGr());
+       /*Thread dealSafariThread = new Thread(new dealSagariGr());
         Thread ekdromiGr = new Thread(new ekdromiGr());
         Thread xenodoxeioGr = new Thread(new xenodoxeioGr());
         Thread hotelsGr = new Thread(new HotelsCom());
@@ -64,7 +61,10 @@ public class Application {
         dealSafariThread.start();
         ekdromiGr.start();
         xenodoxeioGr.start();
-        hotelsGr.start();
+        hotelsGr.start();*/
+
+       testHotels test = new testHotels();
+       test.print();
 
        /* System.out.println("Αποτελέσματα απο Hotels.com");
         HotelsCom hotelsCom = new HotelsCom();
