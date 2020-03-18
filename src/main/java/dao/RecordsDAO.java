@@ -10,7 +10,7 @@ public class RecordsDAO {
     public int addProduct(Records records) {
 
         int status = 0;
-        String sql = "INSERT INTO web(hotelnames,hotelprices) VALUES(?,?)";
+        String sql = "INSERT INTO results(hotelnames,hotelprices) VALUES(?,?)";
         //String url = "jdbc:sqlite:web.db";
         try  {
             Connection conn = DbUtil.connect();
