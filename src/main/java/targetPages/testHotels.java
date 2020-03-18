@@ -25,14 +25,16 @@ public class testHotels {
                 //page = Jsoup.connect("https://el.hotels.com/search.do?q-destination = Αθήνα").get();
 
                 Elements hotelNames = page.getElementsByClass("property-name-link");
-                Elements hotelPrice = page.select("[class=price]");
+                //Elements hotelPrice = page.select("");
+                Elements hotelRates = page.select("strong.guest-reviews-badge");
                 System.out.println("--------------------------------------");
                 System.out.println("Αποτελέσματα απο HotelGr");
                 for (int i =0; i< hotelNames.size(); i++){
                     String names = hotelNames.get(i).text().trim();
-                    String priceString = hotelPrice.get(i).text();
+                    //String priceString = hotelPrice.get(i).text();
+                    String ratesString = hotelRates.get(i).text();
                     //double price = Double.parseDouble(priceString);
-                    System.out.println("| " + names  + " | " + priceString);
+                    System.out.println("| " + names  + " | "  + " | " + ratesString );
                 }
                 System.out.println("--------------------------------------");
 

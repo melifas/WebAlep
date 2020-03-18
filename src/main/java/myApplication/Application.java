@@ -13,7 +13,7 @@ public class Application {
     static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
-        DbUtil.connect();
+
 
        /* boolean quit = false;
         printActions();
@@ -53,18 +53,54 @@ public class Application {
             }*/
 
 
-       /*Thread dealSafariThread = new Thread(new dealSagariGr());
-        Thread ekdromiGr = new Thread(new ekdromiGr());
-        Thread xenodoxeioGr = new Thread(new xenodoxeioGr());
-        Thread hotelsGr = new Thread(new HotelsCom());
 
-        dealSafariThread.start();
-        ekdromiGr.start();
-        xenodoxeioGr.start();
-        hotelsGr.start();*/
 
-       testHotels test = new testHotels();
-       test.print();
+ekdromiGr ekdromiGr = new ekdromiGr();
+ ekdromiGr.print();
+
+
+      /*  try {
+            Thread dealSafariThread = new Thread(new dealSagariGr());
+            dealSafariThread.start();
+        }catch (Exception e){
+            e.getMessage();
+        }
+
+        try {
+            Thread ekdromiGr = new Thread(new ekdromiGr());
+            ekdromiGr.start();
+        }catch (Exception e){
+            e.getMessage();
+        }
+
+
+        try {
+            Thread xenodoxeioGr = new Thread(new xenodoxeioGr());
+            xenodoxeioGr.start();
+        }catch (Exception e){
+            e.getMessage();
+        }
+
+        try {
+            Thread hotelsGr = new Thread(new HotelsCom());
+            hotelsGr.start();
+        }catch (Exception e){
+            e.getMessage();
+        }*/
+
+
+
+
+      /* try {
+           testHotels ts = new testHotels();
+           ts.print();
+       }catch (Exception e){
+           e.getMessage();
+       }*/
+
+
+        /*trivago tr = new trivago();
+        tr.print();*/
 
        /* System.out.println("Αποτελέσματα απο Hotels.com");
         HotelsCom hotelsCom = new HotelsCom();

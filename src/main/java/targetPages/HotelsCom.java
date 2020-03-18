@@ -8,8 +8,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.net.URLEncoder;
 
-public class HotelsCom implements Runnable  {
-
+public class HotelsCom implements  Runnable {
     public void run() {
         final String query = "Αθήνα";
         final String startdate = "2020-03-15";
@@ -20,20 +19,22 @@ public class HotelsCom implements Runnable  {
         {
             try {
                 page = Jsoup.connect("https://el.hotels.com/search.do?q-destination=" + URLEncoder.encode(query,"UTF-8")+"&q-check-in="+ URLEncoder.encode(startdate,"UTF-8")
-                    +"&q-check-out="+URLEncoder.encode(enddate,"UTF-8") + "&q-rooms=1&q-room-0-adults=1&q-room-0-children=0"
+                        +"&q-check-out="+URLEncoder.encode(enddate,"UTF-8") + "&q-rooms=1&q-room-0-adults=1&q-room-0-children=0"
                 ).get();
 
                 //page = Jsoup.connect("https://el.hotels.com/search.do?q-destination = Αθήνα").get();
 
-                Elements hotelNames = page.getElementsByClass("h3.p-name a");
-                Elements hotelPrice = page.getElementsByClass("price-link");
+                Elements hotelNames = page.getElementsByClass("property-name-link");
+                //Elements hotelPrice = page.select("");
+                Elements hotelRates = page.select("strong.guest-reviews-badge");
                 System.out.println("--------------------------------------");
                 System.out.println("Αποτελέσματα απο HotelGr");
                 for (int i =0; i< hotelNames.size(); i++){
                     String names = hotelNames.get(i).text().trim();
-                    String priceString = hotelPrice.get(i).text();
+                    //String priceString = hotelPrice.get(i).text();
+                    String ratesString = hotelRates.get(i).text();
                     //double price = Double.parseDouble(priceString);
-                    System.out.println("| " + names  + " | " + priceString);
+                    System.out.println("| " + names  + " | "  + " | " + ratesString );
                 }
                 System.out.println("--------------------------------------");
 
@@ -51,4 +52,3 @@ public class HotelsCom implements Runnable  {
         }
     }
 }
-
