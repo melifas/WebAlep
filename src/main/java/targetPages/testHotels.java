@@ -8,8 +8,8 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.net.URLEncoder;
 
-public class HotelsCom implements  Runnable {
-    public void run() {
+public class testHotels {
+    public void print() {
         final String query = "Αθήνα";
         final String startdate = "2020-03-15";
         //TODO Να βρώ ενα τρόπο να αυξανω την ημερομηνια κατα 1

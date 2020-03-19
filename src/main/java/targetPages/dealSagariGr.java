@@ -21,8 +21,8 @@ public class dealSagariGr implements Runnable {
 
                 Elements hotelNames = page.select("div.list-deal-company-name");
                 Elements hotelPrice = page.select("span.list-deal-final-price");
-
-
+                System.out.println("--------------------------------------");
+                System.out.println("Αποτελέσματα απο DealSafari");
                 for (int i =0; i< hotelNames.size(); i++){
                     String names = hotelNames.get(i).text().trim();
                     String priceString = hotelPrice.get(i).text();
