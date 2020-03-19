@@ -3,9 +3,9 @@ package pojo;
 public class Records {
 
     private String hotelnames;
-    private String hotelprices;
+    private double hotelprices;
 
-    public Records(String hotelnames, String hotelprices) {
+    public Records(String hotelnames, double hotelprices) {
         this.hotelnames = hotelnames;
         this.hotelprices = hotelprices;
     }
@@ -26,11 +26,11 @@ public class Records {
         this.hotelnames = hotelnames;
     }
 
-    public String getHotelprices() {
+    public double getHotelprices() {
         return hotelprices;
     }
 
-    public void setHotelprices(String hotelprices) {
+    public void setHotelprices(double hotelprices) {
         this.hotelprices = hotelprices;
     }
 

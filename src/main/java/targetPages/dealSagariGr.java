@@ -11,8 +11,8 @@ import java.net.URLEncoder;
 
 
 //δεν χρησιμοποιεί ημερομηνία για τις αναζητήσεις
-public class dealSagariGr implements Runnable {
-    public void run() {
+public class dealSagariGr {
+    public void print() {
         final String query = "Αττική";
         Document page;
         {

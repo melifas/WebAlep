@@ -1,6 +1,7 @@
 package myApplication;
 
 import DbUtil.DbUtil;
+import dao.RecordsDAO;
 import org.w3c.dom.ls.LSOutput;
 import targetPages.*;
 
@@ -11,10 +12,12 @@ import java.util.concurrent.Executors;
 public class Application {
 
     static Scanner input = new Scanner(System.in);
+     static RecordsDAO dao = new RecordsDAO();
 
     public static void main(String[] args) {
 
-
+        dao.dropIt();
+        dao.createIt();
        /* boolean quit = false;
         printActions();
         while (!quit) {
@@ -53,10 +56,14 @@ public class Application {
             }*/
 
 
+/*xenodoxeioGr xe = new xenodoxeioGr();
+xe.print();*/
 
+/*ekdromiGr ekdromiGr = new ekdromiGr();
+ ekdromiGr.print();*/
 
-ekdromiGr ekdromiGr = new ekdromiGr();
- ekdromiGr.print();
+dealSagariGr deal = new dealSagariGr();
+deal.print();
 
 
       /*  try {
@@ -64,17 +71,21 @@ ekdromiGr ekdromiGr = new ekdromiGr();
             dealSafariThread.start();
         }catch (Exception e){
             e.getMessage();
-        }
+        }*/
 
-        try {
+
+
+        /*try {
             Thread ekdromiGr = new Thread(new ekdromiGr());
+
+
             ekdromiGr.start();
         }catch (Exception e){
             e.getMessage();
-        }
+        }*/
 
 
-        try {
+        /*try {
             Thread xenodoxeioGr = new Thread(new xenodoxeioGr());
             xenodoxeioGr.start();
         }catch (Exception e){
