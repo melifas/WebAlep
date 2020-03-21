@@ -57,13 +57,16 @@ public class Application {
 
 
 /*xenodoxeioGr xe = new xenodoxeioGr();
-xe.print();*/
+xe.print();
 
-/*ekdromiGr ekdromiGr = new ekdromiGr();
- ekdromiGr.print();*/
+ekdromiGr ekdromiGr = new ekdromiGr();
+ ekdromiGr.print();
 
 dealSagariGr deal = new dealSagariGr();
-deal.print();
+deal.print();*/
+
+HotelsCom hotel = new HotelsCom();
+hotel.print();
 
 
       /*  try {

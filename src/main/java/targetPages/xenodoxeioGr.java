@@ -20,8 +20,6 @@ public class xenodoxeioGr  {
         {
             try {
                 page = Jsoup.connect("https://www.xenodoxeio.gr/search?search_term=" + URLEncoder.encode(query,"UTF-8")+"&checkin"+URLEncoder.encode(date,"UTF-8")).get();
-
-
                 Elements hotelNames = page.getElementsByClass("main-deal-hotel-name");
                 Elements hotelPrice = page.getElementsByClass("main-deal-final-price palette-light");
 
@@ -29,7 +27,8 @@ public class xenodoxeioGr  {
                 System.out.println("Αποτελέσματα απο xenodoxeioGr");
                 for (int i =0; i< hotelNames.size(); i++){
                     String names = hotelNames.get(i).text().trim();
-                    String priceString = hotelPrice.get(i).text().substring(0,3);
+                    //regular expression για αντικατάσταση όλων των χαρακτήρων εκτός των αριθμητικών
+                    String priceString = hotelPrice.get(i).text().replaceAll("[^0-9]", "");
                     double price = Double.parseDouble(priceString);
                     Records records  = new Records(names,price);
                     dao.addProduct(records);

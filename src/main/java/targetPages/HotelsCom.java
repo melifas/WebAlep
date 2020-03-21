@@ -1,15 +1,18 @@
 package targetPages;
 
+import dao.RecordsDAO;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import pojo.Records;
 
 import java.io.IOException;
 import java.net.URLEncoder;
 
-public class HotelsCom implements  Runnable {
-    public void run() {
+public class HotelsCom  {
+    RecordsDAO dao = new RecordsDAO();
+    public void print() {
         final String query = "Αθήνα";
         final String startdate = "2020-03-15";
         //TODO Να βρώ ενα τρόπο να αυξανω την ημερομηνια κατα 1
@@ -25,27 +28,28 @@ public class HotelsCom implements  Runnable {
                 //page = Jsoup.connect("https://el.hotels.com/search.do?q-destination = Αθήνα").get();
 
                 Elements hotelNames = page.getElementsByClass("property-name-link");
-                //Elements hotelPrice = page.select("");
-                Elements hotelRates = page.select("strong.guest-reviews-badge");
+                Elements hotelPrice = page.select("div.price");
+                //Elements hotelRates = page.select("strong.guest-reviews-badge");
                 System.out.println("--------------------------------------");
                 System.out.println("Αποτελέσματα απο HotelGr");
                 for (int i =0; i< hotelNames.size(); i++){
                     String names = hotelNames.get(i).text().trim();
-                    //String priceString = hotelPrice.get(i).text();
-                    String ratesString = hotelRates.get(i).text();
-                    //double price = Double.parseDouble(priceString);
-                    System.out.println("| " + names  + " | "  + " | " + ratesString );
+                    String priceString = hotelPrice.get(i).text().substring(5);
+                    String pureprice = priceString.replaceAll("[^0-9]", "");
+                    //String ratesString = hotelRates.get(i).text();
+                    double price = Double.parseDouble(pureprice);
+                    Records records  = new Records(names,price);
+                    dao.addProduct(records);
+                    System.out.println("| " + names  + " | "  + " | " + price );
                 }
                 System.out.println("--------------------------------------");
-
-
 
                /* for (Element searchResult: page.select("h3.p-name a")) {
                     final String title = searchResult.text();
 
                     System.out.println(title);
                 }*/
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 

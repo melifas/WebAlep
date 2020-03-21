@@ -1,9 +1,11 @@
 package targetPages;
 
+import dao.RecordsDAO;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import pojo.Records;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -12,6 +14,7 @@ import java.net.URLEncoder;
 
 //δεν χρησιμοποιεί ημερομηνία για τις αναζητήσεις
 public class dealSagariGr {
+    RecordsDAO dao = new RecordsDAO();
     public void print() {
         final String query = "Αττική";
         Document page;
@@ -25,9 +28,11 @@ public class dealSagariGr {
                 System.out.println("Αποτελέσματα απο DealSafari");
                 for (int i =0; i< hotelNames.size(); i++){
                     String names = hotelNames.get(i).text().trim();
-                    String priceString = hotelPrice.get(i).text();
-                    //double price = Double.parseDouble(priceString);
-                    System.out.println("| " + names  + " | " + priceString);
+                    String priceString = hotelPrice.get(i).text().replaceAll("[^0-9]", "");
+                    double price = Double.parseDouble(priceString);
+                    Records records  = new Records(names,price);
+                    dao.addProduct(records);
+                    System.out.println("| " + names  + " | " + price);
                 }
 
 
