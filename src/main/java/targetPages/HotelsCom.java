@@ -28,19 +28,35 @@ public class HotelsCom  {
                 //page = Jsoup.connect("https://el.hotels.com/search.do?q-destination = Αθήνα").get();
 
                 Elements hotelNames = page.getElementsByClass("property-name-link");
-                Elements hotelPrice = page.select("div.price");
+                Elements hotelPricelink = page.select("div.price");
+
                 //Elements hotelRates = page.select("strong.guest-reviews-badge");
                 System.out.println("--------------------------------------");
                 System.out.println("Αποτελέσματα απο HotelGr");
                 for (int i =0; i< hotelNames.size(); i++){
                     String names = hotelNames.get(i).text().trim();
-                    String priceString = hotelPrice.get(i).text().substring(5);
-                    String pureprice = priceString.replaceAll("[^0-9]", "");
+                    String priceString = hotelPricelink.get(i).text();
+                    if (priceString.length()>7){
+                        String pricenotready = priceString.substring(7);
+                        String priceready = pricenotready.replaceAll("[^0-9]", "");
+                        double price = Double.parseDouble(priceready);
+                        Records records  = new Records(names,price);
+                        dao.addProduct(records);
+                        System.out.println("| " + names  + " | "  + " | " + price );
+                    }else{
+                        String priceready = priceString.replaceAll("[^0-9]", "");
+                        double price = Double.parseDouble(priceready);
+                        Records records  = new Records(names,price);
+                        dao.addProduct(records);
+                        System.out.println("| " + names  + " | "  + " | " + price );
+                    }
+
+                    //String pureprice = priceString.replaceAll("[^0-9]", "");
                     //String ratesString = hotelRates.get(i).text();
-                    double price = Double.parseDouble(pureprice);
+                    /*double price = Double.parseDouble(pureprice);
                     Records records  = new Records(names,price);
-                    dao.addProduct(records);
-                    System.out.println("| " + names  + " | "  + " | " + price );
+                    dao.addProduct(records);*/
+
                 }
                 System.out.println("--------------------------------------");
 
