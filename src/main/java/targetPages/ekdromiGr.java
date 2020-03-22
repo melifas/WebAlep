@@ -10,6 +10,7 @@ import pojo.Records;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.Date;
+import java.util.concurrent.RunnableFuture;
 
 
 //φερνει κανονικά τις αναζητήσεις αλλά όχι όλες γιατί είναι δυναμική η ιστοσελίδα
@@ -32,9 +33,10 @@ public class ekdromiGr  {
                 System.out.println("Αποτελέσματα απο EkdromiGr");
                 for (int i =0; i< hotelNames.size(); i++){
                     String names = hotelNames.get(i).text().trim();
-                    String priceString = hotelPrice.get(i).text();
-                    //double price = Double.parseDouble(priceString);
-                    Records records  = new Records(names,priceString);
+                    //regular expression για αντικατάσταση όλων των χαρακτήρων εκτός των αριθμητικών
+                    String priceString = hotelPrice.get(i).text().replaceAll("[^0-9]", "");
+                    double price = Double.parseDouble(priceString);
+                    Records records  = new Records(names,price);
                     dao.addProduct(records);
                     System.out.println("| " + names  + " | " + priceString);
                 }
