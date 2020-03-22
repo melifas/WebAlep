@@ -11,18 +11,19 @@ import java.io.IOException;
 import java.net.URLEncoder;
 
 public class HotelsCom  {
-    RecordsDAO dao = new RecordsDAO();
-    public void print() {
-        final String query = "Αθήνα";
-        final String startdate = "2020-03-15";
+
+    public void print(String city,String date) {
+        RecordsDAO dao = new RecordsDAO();
+        /*final String query = "Αθήνα";
+        final String startdate = "2020-03-22";
         //TODO Να βρώ ενα τρόπο να αυξανω την ημερομηνια κατα 1
-        final String enddate = "2020-03-16";
+        final String enddate = "2020-03-23";*/
 
         Document page;
         {
             try {
-                page = Jsoup.connect("https://el.hotels.com/search.do?q-destination=" + URLEncoder.encode(query,"UTF-8")+"&q-check-in="+ URLEncoder.encode(startdate,"UTF-8")
-                        +"&q-check-out="+URLEncoder.encode(enddate,"UTF-8") + "&q-rooms=1&q-room-0-adults=1&q-room-0-children=0"
+                page = Jsoup.connect("https://el.hotels.com/search.do?q-destination=" + URLEncoder.encode(city,"UTF-8")+"&q-check-in="+ URLEncoder.encode(date,"UTF-8")
+                        +"&q-rooms=1&q-room-0-adults=1&q-room-0-children=0"
                 ).get();
 
                 //page = Jsoup.connect("https://el.hotels.com/search.do?q-destination = Αθήνα").get();

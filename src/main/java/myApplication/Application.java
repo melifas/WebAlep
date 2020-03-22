@@ -5,6 +5,9 @@ import dao.RecordsDAO;
 import org.w3c.dom.ls.LSOutput;
 import targetPages.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -12,13 +15,14 @@ import java.util.concurrent.Executors;
 public class Application {
 
     static Scanner input = new Scanner(System.in);
-     static RecordsDAO dao = new RecordsDAO();
+    static RecordsDAO dao = new RecordsDAO();
 
     public static void main(String[] args) {
-
+        //truncate λειτουργεία δεν υπάρχει στην sqllite γιατό κάνω drop,create-----------//
         dao.dropIt();
         dao.createIt();
-       /* boolean quit = false;
+
+        boolean quit = false;
         printActions();
         while (!quit) {
             System.out.println("\nEnter action: (6 to show available actions)");
@@ -31,7 +35,7 @@ public class Application {
                     quit = true;
                     break;
                 case 1:
-                    //viewProducts();
+                    prompt ();
                     break;
                 case 2:
                     //addProduct();
@@ -53,20 +57,12 @@ public class Application {
                     break;
                 default:
                     System.out.println("Invalid Operation!Please try again");
-            }*/
+            }
+        }
 
 
-xenodoxeioGr xe = new xenodoxeioGr();
-xe.print();
 
-ekdromiGr ekdromiGr = new ekdromiGr();
- ekdromiGr.print();
 
-dealSagariGr deal = new dealSagariGr();
-deal.print();
-
-HotelsCom hotel = new HotelsCom();
-hotel.print();
 
 
       /*  try {
@@ -116,51 +112,71 @@ hotel.print();
         /*trivago tr = new trivago();
         tr.print();*/
 
-       /* System.out.println("Αποτελέσματα απο Hotels.com");
-        HotelsCom hotelsCom = new HotelsCom();
-        hotelsCom.printResults();
 
-        System.out.println("--------------------------------------");
+        }
 
 
+        //-----------Μέθοδος εκτύπωσης διαθέσιμων λειτουργιών προς τον χρήστη--------
+        private static void printActions () {
+            System.out.println("\nAvailable actions:\npress");
+            System.out.println("0  - to shutdown\n" +
+                    "1  - to scrap web content\n" +
+                    "2  - to add a new product in block chain\n" +
+                    "3  - to search for a product by its id\n" +
+                    "4  - to add many products in block chain\n" +
+                    "5  - to search for a product by its code\n" +
+                    "6  - to print a list of available actions\n" +
+                    "7  - to view time statistics of a product\n"
+            );
+            System.out.println("Choose your action: \n");
+        }
 
+        //----------------------------Εκτύπωση Αποτελεσμάτων--------------------//
+        public static void printResults (String city, String date){
+            HotelsCom hotel = new HotelsCom();
+            hotel.print(city, date);
+            xenodoxeioGr xe = new xenodoxeioGr();
+            xe.print();
+            ekdromiGr ekdromiGr = new ekdromiGr();
+            ekdromiGr.print();
+            dealSagariGr deal = new dealSagariGr();
+            deal.print();
+        }
+        //------------------------Προτροπή χρήστη για είσοδο στοιχείων scraping---------------------------------//
+        public static void prompt () {
+            Scanner input = new Scanner(System.in);
+            System.out.println("Please give us a city");
+            String city = input.nextLine();
 
+            Boolean isOk = false;
+            while (!isOk){
+                System.out.println("Enter a valid date");
+                String date = input.nextLine();
+                if (validationDate(date)) {
+                    printResults(city, date);
+                    isOk = true;
+                    break;
+                }else {
+                    System.out.println("not a valid date provided");
+                }
+            }
+            //System.out.println("Please give us a date");
+            //String date = input.nextLine();
 
-        System.out.println("Αποτελέσματα απο ekdromi.gr");
-        ekdromiGr ekdromi = new ekdromiGr();
-        ekdromi.printResults();
+        }
 
-        System.out.println("-------------------------------------------");
-        System.out.println("Αποτελέσματα απο xenodoxeia.gr");
-        xenodoxeioGr xenodoxeio = new xenodoxeioGr();
-        xenodoxeio.printResults();
-        System.out.println("--------------------------------------");
-
-        System.out.println("Αποτελέσματα απο dealSafari.gr");
-        dealSagariGr dealsafari = new dealSagariGr();
-        dealsafari.printResults();
-        System.out.println("-------------------------------------------");
-
-*/
-
-
-     }
+//-----------------------------------Validation Ημερομηνίας---------------------------//
+    public static boolean validationDate(String DOB){
+        DateFormat df = new SimpleDateFormat("dd/MM/yyy");
+        Date BOD=null;
+        df.setLenient(false);
+        try{
+            BOD = df.parse(DOB);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
-   /* //-----------Μέθοδος εκτύπωσης διαθέσιμων λειτουργιών προς τον χρήστη--------
-    private static void printActions () {
-        System.out.println("\nAvailable actions:\npress");
-        System.out.println("0  - to shutdown\n" +
-                "1  - to print products in block chain\n" +
-                "2  - to add a new product in block chain\n" +
-                "3  - to search for a product by its id\n" +
-                "4  - to add many products in block chain\n" +
-                "5  - to search for a product by its code\n" +
-                "6  - to print a list of available actions\n" +
-                "7  - to view time statistics of a product\n"
-        );
-        System.out.println("Choose your action: ");
+    //----------------------------------------------------------------------------- //
     }
 
-    //-----------------------vvvvvvvvvv-----------------------------------//
-}
-*/

@@ -8,26 +8,25 @@ import java.io.IOException;
 import java.net.URLEncoder;
 
 public class trivago {
-
-    public void print() {
+    public void run() {
         final String query = "Αθήνα";
-        final String date = "2020-03-24";
+        final String date = "15/03/2020";
         Document page;
         {
             try {
                 //page = Jsoup.connect("https://www.ekdromi.gr/frontend/deals/search?term=" + URLEncoder.encode(query,"UTF-8")).get();
 
-                page = Jsoup.connect("https://www.trivago.gr/?aDateRange[arr]=" + URLEncoder.encode(date,"UTF-8") +
+                page = Jsoup.connect("https://www.ekdromi.gr/frontend/deals/live_deals?date=" + URLEncoder.encode(date,"UTF-8") +
                         "&city[]="  + URLEncoder.encode(query,"UTF-8")).get();
 
-                Elements hotelNames = page.select("div.item__details");
-                //Elements hotelPrice = page.getElementsByClass("price");
+                Elements hotelNames = page.getElementsByClass("list_deal_title");
+                Elements hotelPrice = page.getElementsByClass("price");
 
                 for (int i =0; i< hotelNames.size(); i++){
-                    String names = hotelNames.get(i).text();
-                   // String priceString = hotelPrice.get(i).text();
+                    String names = hotelNames.get(i).text().trim();
+                    String priceString = hotelPrice.get(i).text();
                     //double price = Double.parseDouble(priceString);
-                    System.out.println("| " + names  + " | " );
+                    System.out.println("| " + names  + " | " + priceString);
                 }
 
 

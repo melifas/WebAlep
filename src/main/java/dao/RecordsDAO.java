@@ -27,6 +27,27 @@ public class RecordsDAO {
         return status;
     }
 
+    //---------------------Create Table----------------------
+    public  void createNewTable(String tablename) {
+        // SQLite connection string
+        String url = "jdbc:sqlite:web.db";
+        // SQL statement for creating a new table
+        String sqlcreate = "CREATE TABLE IF NOT EXISTS "+tablename +"(\n"
+                + "	id integer PRIMARY KEY,\n"
+                + "	name text NOT NULL,\n"
+                + "	capacity real\n"
+                + ");";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement()) {
+            // create a new table
+            stmt.execute(sqlcreate);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     //---------------------- Drop a table------------------------------
 
     public void dropIt() {
