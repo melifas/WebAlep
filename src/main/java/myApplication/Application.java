@@ -133,14 +133,14 @@ public class Application {
 
         //----------------------------Εκτύπωση Αποτελεσμάτων--------------------//
         public static void printResults (String city, String date){
-            HotelsCom hotel = new HotelsCom();
+           /* HotelsCom hotel = new HotelsCom();
             hotel.print(city, date);
             xenodoxeioGr xe = new xenodoxeioGr();
-            xe.print();
+            xe.print();*/
             ekdromiGr ekdromiGr = new ekdromiGr();
-            ekdromiGr.print();
-            dealSagariGr deal = new dealSagariGr();
-            deal.print();
+            ekdromiGr.print(city, date);
+           /* dealSagariGr deal = new dealSagariGr();
+            deal.print();*/
         }
         //------------------------Προτροπή χρήστη για είσοδο στοιχείων scraping---------------------------------//
         public static void prompt () {
