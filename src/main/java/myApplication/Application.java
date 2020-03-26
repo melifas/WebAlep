@@ -6,6 +6,7 @@ import org.w3c.dom.ls.LSOutput;
 import targetPages.*;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -36,6 +37,10 @@ public class Application {
                     break;
                 case 1:
                     prompt ();
+                    /*kayak k = new kayak();
+                    k.print();
+                    HotelsCom hotel = new HotelsCom();
+                    hotel.print();*/
                     break;
                 case 2:
                     //addProduct();
@@ -61,18 +66,12 @@ public class Application {
         }
 
 
-
-
-
-
       /*  try {
             Thread dealSafariThread = new Thread(new dealSagariGr());
             dealSafariThread.start();
         }catch (Exception e){
             e.getMessage();
         }*/
-
-
 
         /*try {
             Thread ekdromiGr = new Thread(new ekdromiGr());
@@ -97,9 +96,6 @@ public class Application {
         }catch (Exception e){
             e.getMessage();
         }*/
-
-
-
 
       /* try {
            testHotels ts = new testHotels();
@@ -133,15 +129,36 @@ public class Application {
 
         //----------------------------Εκτύπωση Αποτελεσμάτων--------------------//
         public static void printResults (String city, String date){
-           /* HotelsCom hotel = new HotelsCom();
-            hotel.print(city, date);
-            xenodoxeioGr xe = new xenodoxeioGr();
+            HotelsCom hotel = new HotelsCom();
+            String dateFormat = converDate(date);
+            hotel.print(city, dateFormat);
+            /*xenodoxeioGr xe = new xenodoxeioGr();
             xe.print();*/
             ekdromiGr ekdromiGr = new ekdromiGr();
             ekdromiGr.print(city, date);
+
+
            /* dealSagariGr deal = new dealSagariGr();
             deal.print();*/
+           /*kayak k = new kayak();
+           k.print();*/
         }
+    //-------------------------Eπειδή κάποιες Ιστοσελίδες χρειάζονται ημερομηνία σε διαφορετικό format έφτιαξα αυτή την μέθοδο-------------------
+        public static String converDate(String date){
+            SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyy");
+            Date dateValue = null;
+            try {
+                dateValue = input.parse(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            //Αλλαγή του format απο dd/MM/yyy σε yyy-MM-dd
+            SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd");
+            String converted = output.format(dateValue);
+
+            return  converted;
+        }
+
         //------------------------Προτροπή χρήστη για είσοδο στοιχείων scraping---------------------------------//
         public static void prompt () {
             Scanner input = new Scanner(System.in);
