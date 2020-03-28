@@ -22,10 +22,10 @@ public class kayak {
                 //page = Jsoup.connect("https://www.ekdromi.gr/frontend/deals/search?term=" + URLEncoder.encode(query,"UTF-8")).get();
                 https://www.gr.kayak.com/hotels/%CE%A7%CE%B1%CE%BD%CE%B9%CE%AC/2020-03-26/2020-03-27?sort=rank_a
 
-                page = Jsoup.connect("https://www.gr.kayak.com/hotels/Chania/2020-03-26/2020-03-27?sort=rank_a").get();
+                page = Jsoup.connect("https://www.esky.gr/xenodohia/ci/ath/xenodohia-athhna?checkInDate=2020-03-28&checkOutDate=2020-03-29").get();
 
 
-                Elements hotelNames = page.select("button.title Button-No-Standard-Style allowWrap");
+                Elements hotelNames = page.select("hotel-details").select("li.hotel-name");
                 //Elements hotelPrice = page.getElementsByClass("price");
                 int sum = 0;
                 System.out.println("--------------------------------------");

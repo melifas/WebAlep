@@ -9,20 +9,20 @@ import pojo.Records;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.text.DecimalFormat;
 
 // η ημερομηνία αποθηκεύεται σε cookie
 public class xenodoxeioGr  {
-    public void print() {
+    public void print(String city,String date) {
         RecordsDAO dao = new RecordsDAO();
-        final String query = "Αθήνα";
-        final String date = "2020-03-15";
+
         Document page;
         {
             try {
-                page = Jsoup.connect("https://www.xenodoxeio.gr/search?search_term=" + URLEncoder.encode(query,"UTF-8")+"&checkin"+URLEncoder.encode(date,"UTF-8")).get();
+                page = Jsoup.connect("https://www.xenodoxeio.gr/search?search_term=" + URLEncoder.encode(city,"UTF-8")+"&checkin"+URLEncoder.encode(date,"UTF-8")).get();
                 Elements hotelNames = page.getElementsByClass("main-deal-hotel-name");
                 Elements hotelPrice = page.getElementsByClass("main-deal-final-price palette-light");
-
+                int sum = 0;
                 System.out.println("--------------------------------------");
                 System.out.println("Αποτελέσματα απο xenodoxeioGr");
                 for (int i =0; i< hotelNames.size(); i++){
@@ -30,10 +30,23 @@ public class xenodoxeioGr  {
                     //regular expression για αντικατάσταση όλων των χαρακτήρων εκτός των αριθμητικών
                     String priceString = hotelPrice.get(i).text().replaceAll("[^0-9]", "");
                     double price = Double.parseDouble(priceString);
+                    sum+=price;
                     Records records  = new Records(names,price);
                     dao.addProduct(records);
 
                     System.out.println("| " + names  + " | " + priceString);
+                }
+                //Εαν βρέθηκαν αποτελέσματα εμφανισέ τα συγκεντρωτικά αποτελέσματα καθώς και έλεγχος διαίρεσης με το μηδέν
+                if (hotelNames.size()!=0) {
+                    System.out.println();
+                    System.out.println("Βρέθηκαν "+hotelNames.size()+ " ξενοδοχεία");
+                    DecimalFormat df = new DecimalFormat("0.00");
+                    double averagePrice =  sum / hotelNames.size();
+                    df.setMaximumFractionDigits(4);
+                    System.out.println("Μέσος όρος τιμών ξενοδοχείων για την αναζήτηση " + city + "την ημερομηνία "+"είναι "+ df.format(averagePrice)+"");
+                    System.out.println("--------------------------------------");
+                }else{
+                    System.out.println("Κανένα αποτέλεσμα δεν επεστράφει. Δοκιμάστε διαφορετικά κριτήρια αναζήτησης ή προσπαθείστε ξανά");
                 }
                 System.out.println("--------------------------------------");
                 /*for (Element searchResult: page.select("p.main-deal-hotel-name a")) {
@@ -42,7 +55,10 @@ public class xenodoxeioGr  {
                     System.out.println(title);
                 }*/
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println(" Προέκυψε ενα σφάλμα κατά την διάρκεια εκτύπωσης αποτελεσμάτων απο την σελίδα Ekdromi. Προσπαθήστε ξανά αργότερα ");
+            }
+            catch (Exception e){
+                System.out.println(" Προέκυψε ενα σφάλμα κατά την διάρκεια εκτύπωσης αποτελεσμάτων απο την σελίδα Ekdromi. Προσπαθήστε ξανά αργότερα ");
             }
         }
     }

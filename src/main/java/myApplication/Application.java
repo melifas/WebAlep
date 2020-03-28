@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -19,17 +20,15 @@ public class Application {
     static RecordsDAO dao = new RecordsDAO();
 
     public static void main(String[] args) {
-        //truncate λειτουργεία δεν υπάρχει στην sqllite γιατό κάνω drop,create-----------//
+        //truncate λειτουργία δεν υπάρχει στην sqllite γιατό κάνω drop,create-----------//
         dao.dropIt();
         dao.createIt();
-
+//-----------------------------------------------------------------------------------------------//
         boolean quit = false;
         printActions();
         while (!quit) {
-            System.out.println("\nEnter action: (6 to show available actions)");
-            int action = input.nextInt();
-            input.nextLine();
-
+            //System.out.println("\nEnter action: (6 to show available actions)");
+            int action = readInt();
             switch (action) {
                 case 0:
                     System.out.println("\nShutting down...");
@@ -37,10 +36,6 @@ public class Application {
                     break;
                 case 1:
                     prompt ();
-                    /*kayak k = new kayak();
-                    k.print();
-                    HotelsCom hotel = new HotelsCom();
-                    hotel.print();*/
                     break;
                 case 2:
                     //addProduct();
@@ -124,23 +119,26 @@ public class Application {
                     "6  - to print a list of available actions\n" +
                     "7  - to view time statistics of a product\n"
             );
-            System.out.println("Choose your action: \n");
+            //System.out.println("Choose your action: \n");
         }
 
         //----------------------------Εκτύπωση Αποτελεσμάτων--------------------//
         public static void printResults (String city, String date){
+        //----------------Hotels------------------------//
             HotelsCom hotel = new HotelsCom();
             String dateFormat = converDate(date);
             hotel.print(city, dateFormat);
-            /*xenodoxeioGr xe = new xenodoxeioGr();
-            xe.print();*/
+        //---------------xenodoxeio---------------------------------------------//
+            xenodoxeioGr xe = new xenodoxeioGr();
+            xe.print(city, date);
+        //----------------ekdromi-------------------------------------------------//
             ekdromiGr ekdromiGr = new ekdromiGr();
             ekdromiGr.print(city, date);
 
 
            /* dealSagariGr deal = new dealSagariGr();
             deal.print();*/
-           /*kayak k = new kayak();
+          /* kayak k = new kayak();
            k.print();*/
         }
     //-------------------------Eπειδή κάποιες Ιστοσελίδες χρειάζονται ημερομηνία σε διαφορετικό format έφτιαξα αυτή την μέθοδο-------------------
@@ -195,5 +193,32 @@ public class Application {
         }
     }
     //----------------------------------------------------------------------------- //
+    public static int readInt()
+    {
+        boolean error=false;
+        int x=0;
+        do
+        {
+            try
+            {
+                // create object of scanner class.
+                Scanner input=new Scanner(System.in);
+
+                // enter here.
+                System.out.println("\nEnter action: (6 to show available actions)");
+                x=input.nextInt();
+                error=false;
+            }
+            catch(InputMismatchException e)
+            {
+                // accept integer only.
+                System.out.println("Παρακαλώ δώστε αριθμό");
+                error=true;
+            }
+        }
+        while(error);
+        return(x);
     }
+    //-----------------------------------------------------------------------------------//
+}
 
