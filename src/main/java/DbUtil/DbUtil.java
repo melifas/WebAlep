@@ -19,4 +19,11 @@ public class DbUtil {
         }
         return conn;
     }
+    public static void  closeConnection(Connection c){
+        try {
+            c.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

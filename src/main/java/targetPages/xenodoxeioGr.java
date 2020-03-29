@@ -43,7 +43,7 @@ public class xenodoxeioGr  {
                     DecimalFormat df = new DecimalFormat("0.00");
                     double averagePrice =  sum / hotelNames.size();
                     df.setMaximumFractionDigits(4);
-                    System.out.println("Μέσος όρος τιμών ξενοδοχείων για την αναζήτηση " + city + "την ημερομηνία "+"είναι "+ df.format(averagePrice)+"");
+                    System.out.println("Μέσος όρος τιμών ξενοδοχείων για την αναζήτηση " + city + " την ημερομηνία "+"είναι "+ df.format(averagePrice)+"");
                     System.out.println("--------------------------------------");
                 }else{
                     System.out.println("Κανένα αποτέλεσμα δεν επεστράφει. Δοκιμάστε διαφορετικά κριτήρια αναζήτησης ή προσπαθείστε ξανά");

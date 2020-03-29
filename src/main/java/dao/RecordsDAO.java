@@ -61,7 +61,7 @@ public class RecordsDAO {
             System.out.println(e.getMessage());
         }
     }
-
+    //----------------------------------Create Table-----------------------------------
     public void createIt() {
 
         String sql1 = "CREATE TABLE results( Id INTEGER PRIMARY KEY, hotelnames VARCHAR, hotelprices DOUBLE)";
@@ -73,7 +73,44 @@ public class RecordsDAO {
             e.getMessage();
         }
     }
+    //-------------------------sql for counting results-----------------------------//
 
+    public int countRecords(){
+        int counter = 0;
+        try {
+            Connection connection = DbUtil.connect();
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM results");
+
+            while (rs.next()){
+                Records records = new Records(rs.getString("hotelnames"),rs.getDouble("hotelprices"));
+                counter++;
+            }
+            DbUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return counter;
+    }
+
+    //-----------------------------------sql for finding the average price of hotels-------//
+    public float AveragePrice(){
+        try {
+            Connection connection = DbUtil.connect();
+
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery("SELECT Avg(hotelprices) As average FROM results");
+
+            if (rs.next()){
+                return rs.getFloat(1);
+            }
+
+            DbUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+            return 0;
+    }
 }
 
 

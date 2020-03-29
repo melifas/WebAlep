@@ -36,6 +36,10 @@ public class Application {
                     break;
                 case 1:
                     prompt ();
+                    System.out.println("Συνολικός αριθμός δωματίων απο scrapping ");
+                    System.out.println(dao.countRecords());
+                    System.out.println("Μέση συνολικ΄η τιμή δωματίων");
+                    System.out.println(dao.AveragePrice());
                     break;
                 case 2:
                     //addProduct();
@@ -56,7 +60,7 @@ public class Application {
                     //viewTimeStatisticsOfProduct();
                     break;
                 default:
-                    System.out.println("Invalid Operation!Please try again");
+                    System.out.println("Επιλέξτε μια έγκυρη λειτουργία");
             }
         }
 
@@ -135,11 +139,10 @@ public class Application {
             ekdromiGr ekdromiGr = new ekdromiGr();
             ekdromiGr.print(city, date);
 
+        //-------------------dealSafari---------------------------------------------//
+            dealSagariGr deal = new dealSagariGr();
+            deal.print(city);
 
-           /* dealSagariGr deal = new dealSagariGr();
-            deal.print();*/
-          /* kayak k = new kayak();
-           k.print();*/
         }
     //-------------------------Eπειδή κάποιες Ιστοσελίδες χρειάζονται ημερομηνία σε διαφορετικό format έφτιαξα αυτή την μέθοδο-------------------
         public static String converDate(String date){
