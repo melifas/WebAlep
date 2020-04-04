@@ -13,7 +13,7 @@ public class DbUtil {
             String url = "jdbc:sqlite:web.db";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
-            System.out.println("Connection to SQLite has been established.");
+            //System.out.println("Επιτυχής Σύνδεση με την Βάση");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

@@ -1,5 +1,6 @@
 package targetPages;
 
+import DbUtil.DbUtil;
 import dao.RecordsDAO;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,8 +16,9 @@ import java.util.concurrent.RunnableFuture;
 
 
 //φερνει κανονικά τις αναζητήσεις αλλά όχι όλες γιατί είναι δυναμική η ιστοσελίδα
-public class ekdromiGr  {
-    public void print(String city,String date) {
+public class ekdromiGr{
+
+    public void print(String city, String date) {
         RecordsDAO dao = new RecordsDAO();
 
         /*final String query = "Αθήνα";
@@ -31,8 +33,13 @@ public class ekdromiGr  {
 
                 Elements hotelNames = page.getElementsByClass("list_deal_title");
                 Elements hotelPrice = page.getElementsByClass("price");
+                //Έλεγχος σύνσεση με την βάσξ δεδομένων
+                if(DbUtil.connect()!=null){
+                    System.out.println("Επιτυχής Σύνδεση με την Βάση");
+                }else{
+                    System.out.println("Πρόβλημα σύνδεσης με την Βάση δεδομένων");
+                }
                 int sum = 0;
-                System.out.println("--------------------------------------");
                 System.out.println("Αποτελέσματα απο EkdromiGr");
                 for (int i =0; i< hotelNames.size(); i++){
                     String names = hotelNames.get(i).text().trim();
@@ -52,8 +59,7 @@ public class ekdromiGr  {
                     DecimalFormat df = new DecimalFormat("0.00");
                     double averagePrice =  sum / hotelNames.size();
                     df.setMaximumFractionDigits(4);
-                    System.out.println("Μέσος όρος τιμών ξενοδοχείων για την αναζήτηση " + city + " την ημερομηνία "+"είναι "+ df.format(averagePrice)+"");
-                    System.out.println("--------------------------------------");
+                    System.out.println("Μέσος όρος τιμών ξενοδοχείων για την αναζήτηση " + city + " την ημερομηνία "+ date + " είναι "+ df.format(averagePrice)+"");
                 }else{
                     System.out.println("Κανένα αποτέλεσμα δεν επεστράφει. Δοκιμάστε διαφορετικά κριτήρια αναζήτησης ή προσπαθείστε ξανά");
                 }

@@ -1,5 +1,6 @@
 package targetPages;
 
+import DbUtil.DbUtil;
 import dao.RecordsDAO;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -22,6 +23,12 @@ public class xenodoxeioGr  {
                 page = Jsoup.connect("https://www.xenodoxeio.gr/search?search_term=" + URLEncoder.encode(city,"UTF-8")+"&checkin"+URLEncoder.encode(date,"UTF-8")).get();
                 Elements hotelNames = page.getElementsByClass("main-deal-hotel-name");
                 Elements hotelPrice = page.getElementsByClass("main-deal-final-price palette-light");
+                //Έλεγχος σύνσεση με την βάσξ δεδομένων
+                if(DbUtil.connect()!=null){
+                    System.out.println("Επιτυχής Σύνδεση με την Βάση");
+                }else{
+                    System.out.println("Πρόβλημα σύνδεσης με την Βάση δεδομένων");
+                }
                 int sum = 0;
                 System.out.println("--------------------------------------");
                 System.out.println("Αποτελέσματα απο xenodoxeioGr");
@@ -43,8 +50,7 @@ public class xenodoxeioGr  {
                     DecimalFormat df = new DecimalFormat("0.00");
                     double averagePrice =  sum / hotelNames.size();
                     df.setMaximumFractionDigits(4);
-                    System.out.println("Μέσος όρος τιμών ξενοδοχείων για την αναζήτηση " + city + " την ημερομηνία "+"είναι "+ df.format(averagePrice)+"");
-                    System.out.println("--------------------------------------");
+                    System.out.println("Μέσος όρος τιμών ξενοδοχείων για την αναζήτηση " + city + " την ημερομηνία "+date +" είναι "+ df.format(averagePrice)+"");
                 }else{
                     System.out.println("Κανένα αποτέλεσμα δεν επεστράφει. Δοκιμάστε διαφορετικά κριτήρια αναζήτησης ή προσπαθείστε ξανά");
                 }

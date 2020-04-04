@@ -31,14 +31,14 @@ public class Application {
             int action = readInt();
             switch (action) {
                 case 0:
-                    System.out.println("\nShutting down...");
+                    System.out.println("\nΈξοδος...");
                     quit = true;
                     break;
                 case 1:
                     prompt ();
                     System.out.println("Συνολικός αριθμός δωματίων απο scrapping ");
                     System.out.println(dao.countRecords());
-                    System.out.println("Μέση συνολικ΄η τιμή δωματίων");
+                    System.out.println("Μέση συνολική τιμή δωματίων");
                     System.out.println(dao.AveragePrice());
                     break;
                 case 2:
@@ -64,7 +64,6 @@ public class Application {
             }
         }
 
-
       /*  try {
             Thread dealSafariThread = new Thread(new dealSagariGr());
             dealSafariThread.start();
@@ -74,8 +73,6 @@ public class Application {
 
         /*try {
             Thread ekdromiGr = new Thread(new ekdromiGr());
-
-
             ekdromiGr.start();
         }catch (Exception e){
             e.getMessage();
@@ -96,26 +93,13 @@ public class Application {
             e.getMessage();
         }*/
 
-      /* try {
-           testHotels ts = new testHotels();
-           ts.print();
-       }catch (Exception e){
-           e.getMessage();
-       }*/
-
-
-        /*trivago tr = new trivago();
-        tr.print();*/
-
-
-        }
-
+    }//τέλος main
 
         //-----------Μέθοδος εκτύπωσης διαθέσιμων λειτουργιών προς τον χρήστη--------
         private static void printActions () {
             System.out.println("\nAvailable actions:\npress");
-            System.out.println("0  - to shutdown\n" +
-                    "1  - to scrap web content\n" +
+            System.out.println("0  - Για έξοδο απο την εφαρμογή\n" +
+                    "1  - Για εκτέλεση web scarpping \n" +
                     "2  - to add a new product in block chain\n" +
                     "3  - to search for a product by its id\n" +
                     "4  - to add many products in block chain\n" +
@@ -163,19 +147,19 @@ public class Application {
         //------------------------Προτροπή χρήστη για είσοδο στοιχείων scraping---------------------------------//
         public static void prompt () {
             Scanner input = new Scanner(System.in);
-            System.out.println("Please give us a city");
+            System.out.println("Παρακαλώ δώστε πόλη αναζήτησης");
             String city = input.nextLine();
 
             Boolean isOk = false;
             while (!isOk){
-                System.out.println("Enter a valid date");
+                System.out.println("Παρακαλώ δώστε ημερονηνία σε μορφή dd/MM/yyyy");
                 String date = input.nextLine();
                 if (validationDate(date)) {
                     printResults(city, date);
                     isOk = true;
                     break;
                 }else {
-                    System.out.println("not a valid date provided");
+                    System.out.println("Δεν δώθηκε έγκυρη ημερομηνία");
                 }
             }
             //System.out.println("Please give us a date");
@@ -206,7 +190,6 @@ public class Application {
             {
                 // create object of scanner class.
                 Scanner input=new Scanner(System.in);
-
                 // enter here.
                 System.out.println("\nEnter action: (6 to show available actions)");
                 x=input.nextInt();
