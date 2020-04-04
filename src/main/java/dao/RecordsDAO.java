@@ -9,7 +9,7 @@ public class RecordsDAO {
 
 
     //--------------------Προσθήκη records απο web scrapping---------------------------//
-    public int addProduct(Records records) {
+    public synchronized int addProduct(Records records) {
 
         int status = 0;
         String sql = "INSERT INTO results(hotelnames,hotelprices) VALUES(?,?)";

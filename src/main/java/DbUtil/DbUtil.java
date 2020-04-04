@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DbUtil {
 
-    public static Connection connect() {
+    public static synchronized Connection connect() {
         Connection conn = null;
         try {
             // db parameters

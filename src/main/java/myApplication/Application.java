@@ -111,14 +111,28 @@ public class Application {
         }
 
         //----------------------------Εκτύπωση Αποτελεσμάτων--------------------//
-        public static void printResults (String city, String date){
+        public static void printResults (String city, String date) throws InterruptedException {
 
-            ExecutorService exec = Executors.newFixedThreadPool(8);
+           /* ExecutorService exec = Executors.newFixedThreadPool(8);
 
             exec.execute(new ekdromiGr(city, date));
             exec.execute(new HotelsCom(city, converDate(date)));
             exec.execute(new xenodoxeioGr(city, date));
-            exec.execute(new dealSagariGr(city));
+            exec.execute(new dealSagariGr(city));*/
+
+           Thread t1 = new Thread(new ekdromiGr(city, date));
+           Thread t2 = new Thread(new HotelsCom(city, date));
+            Thread t3 = new Thread(new xenodoxeioGr(city, date));
+            Thread t4 = new Thread(new dealSagariGr(city));
+            t1.start();
+            t2.start();
+            t3.start();
+            t4.start();
+
+            t1.join();
+            t2.join();
+            t3.join();
+            t4.join();
 
         }
     //-------------------------Eπειδή κάποιες Ιστοσελίδες χρειάζονται ημερομηνία σε διαφορετικό format έφτιαξα αυτή την μέθοδο-------------------
@@ -148,7 +162,11 @@ public class Application {
                 System.out.println("Παρακαλώ δώστε ημερονηνία σε μορφή dd/MM/yyyy");
                 String date = input.nextLine();
                 if (validationDate(date)) {
-                    printResults(city, date);
+                    try {
+                        printResults(city, date);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     isOk = true;
                     break;
                 }else {
