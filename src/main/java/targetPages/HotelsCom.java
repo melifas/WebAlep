@@ -25,7 +25,7 @@ public class HotelsCom implements Runnable  {
         RecordsDAO dao = new RecordsDAO();
 
         //TODO Να βρώ ενα τρόπο να αυξανω την ημερομηνια κατα 1
-        final String enddate = increasDateByOne(date);
+         String enddate = increasDateByOne(date);
 
         Document page;
         {
@@ -76,9 +76,9 @@ public class HotelsCom implements Runnable  {
                     DecimalFormat df = new DecimalFormat("0.00");
                     double averagePrice =  sum / hotelNames.size();
                     df.setMaximumFractionDigits(4);
-                    System.out.println("Μέσος όρος τιμών ξενοδοχείων για την αναζήτηση " + city + " την ημερομηνία "+ date + " είναι "+ df.format(averagePrice)+"");
+                    System.out.println("Μέσος όρος τιμών ξενοδοχείων απο hotel.gr για την αναζήτηση " + city + " την ημερομηνία "+ date + " είναι "+ df.format(averagePrice)+"");
                 }else{
-                    System.out.println("Κανένα αποτέλεσμα δεν επεστράφει. Δοκιμάστε διαφορετικά κριτήρια αναζήτησης ή προσπαθείστε ξανά");
+                    System.out.println("Κανένα αποτέλεσμα δεν επεστράφει απο hotel.gr. Δοκιμάστε διαφορετικά κριτήρια αναζήτησης ή προσπαθείστε ξανά");
                 }
             } catch (Exception e) {
                 System.out.println("Ενδέχεται κάποια αποτελέσματα να μην επεστράφησαν");
@@ -87,7 +87,7 @@ public class HotelsCom implements Runnable  {
     }
     //Το site θέλει στο url αρχική ημερομηνία(την οποία μας δίνει ο χρήστης). Για να μας παρουσιάσει αποτελέσματα θέλει και τελική ημερομηνία η οποία by Default είναι μια ημέρα μεγαλύτερη.
     //Η μέθοδος αυτή απλά αυξάνει την ημερομηνία κατά 1 για να μπει στο url.
-    public String increasDateByOne(String startdate){
+    public String  increasDateByOne(String startdate){
         Character last = startdate.charAt(9);
         //Κάντο int και αύξησε το κατά 1
         Integer convert =Character.getNumericValue(last);

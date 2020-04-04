@@ -68,9 +68,9 @@ public class ekdromiGr implements Runnable{
                     DecimalFormat df = new DecimalFormat("0.00");
                     double averagePrice =  sum / hotelNames.size();
                     df.setMaximumFractionDigits(4);
-                    System.out.println("Μέσος όρος τιμών ξενοδοχείων για την αναζήτηση " + city + " την ημερομηνία "+ date + " είναι "+ df.format(averagePrice)+"");
+                    System.out.println("Μέσος όρος τιμών ξενοδοχείων  απο ekdromi.gr για την αναζήτηση " + city + " την ημερομηνία "+ date + " είναι "+ df.format(averagePrice)+"");
                 }else{
-                    System.out.println("Κανένα αποτέλεσμα δεν επεστράφει. Δοκιμάστε διαφορετικά κριτήρια αναζήτησης ή προσπαθείστε ξανά");
+                    System.out.println("Κανένα αποτέλεσμα δεν επεστράφει apo ekdromi.gr. Δοκιμάστε διαφορετικά κριτήρια αναζήτησης ή προσπαθείστε ξανά");
                 }
 
                 System.out.println("--------------------------------------");
