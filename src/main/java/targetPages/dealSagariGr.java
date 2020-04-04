@@ -14,9 +14,14 @@ import java.text.DecimalFormat;
 
 
 //δεν χρησιμοποιεί ημερομηνία για τις αναζητήσεις
-public class dealSagariGr {
-    RecordsDAO dao = new RecordsDAO();
-    public void print(String city) {
+public class dealSagariGr implements Runnable {
+    private String city;
+
+    public dealSagariGr(String city) {
+        this.city = city;
+    }
+    public void run() {
+        RecordsDAO dao = new RecordsDAO();
         final String query = "Αττική";
         Document page;
         {

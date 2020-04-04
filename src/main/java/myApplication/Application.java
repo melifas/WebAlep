@@ -112,20 +112,13 @@ public class Application {
 
         //----------------------------Εκτύπωση Αποτελεσμάτων--------------------//
         public static void printResults (String city, String date){
-        //----------------Hotels------------------------//
-            HotelsCom hotel = new HotelsCom();
-            String dateFormat = converDate(date);
-            hotel.print(city, dateFormat);
-        //---------------xenodoxeio---------------------------------------------//
-            xenodoxeioGr xe = new xenodoxeioGr();
-            xe.print(city, date);
-        //----------------ekdromi-------------------------------------------------//
-            ekdromiGr ekdromiGr = new ekdromiGr();
-            ekdromiGr.print(city, date);
 
-        //-------------------dealSafari---------------------------------------------//
-            dealSagariGr deal = new dealSagariGr();
-            deal.print(city);
+            ExecutorService exec = Executors.newFixedThreadPool(8);
+
+            exec.execute(new ekdromiGr(city, date));
+            exec.execute(new HotelsCom(city, converDate(date)));
+            exec.execute(new xenodoxeioGr(city, date));
+            exec.execute(new dealSagariGr(city));
 
         }
     //-------------------------Eπειδή κάποιες Ιστοσελίδες χρειάζονται ημερομηνία σε διαφορετικό format έφτιαξα αυτή την μέθοδο-------------------

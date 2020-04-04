@@ -16,9 +16,18 @@ import java.util.concurrent.RunnableFuture;
 
 
 //φερνει κανονικά τις αναζητήσεις αλλά όχι όλες γιατί είναι δυναμική η ιστοσελίδα
-public class ekdromiGr{
+public class ekdromiGr implements Runnable{
 
-    public void print(String city, String date) {
+
+    private String city;
+    private String date;
+
+    public ekdromiGr(String city, String date) {
+        this.city = city;
+        this.date = date;
+    }
+
+    public void run() {
         RecordsDAO dao = new RecordsDAO();
 
         /*final String query = "Αθήνα";

@@ -13,8 +13,18 @@ import java.net.URLEncoder;
 import java.text.DecimalFormat;
 
 // η ημερομηνία αποθηκεύεται σε cookie
-public class xenodoxeioGr  {
-    public void print(String city,String date) {
+public class xenodoxeioGr implements Runnable  {
+
+    private String city;
+    private String date;
+
+    public xenodoxeioGr(String city, String date) {
+        this.city = city;
+        this.date = date;
+    }
+
+
+    public void run() {
         RecordsDAO dao = new RecordsDAO();
 
         Document page;

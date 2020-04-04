@@ -12,9 +12,16 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
 
-public class HotelsCom  {
+public class HotelsCom implements Runnable  {
+    private String city;
+    private String date;
 
-    public void print(String city,String date) {
+    public HotelsCom(String city, String date) {
+        this.city = city;
+        this.date = date;
+    }
+
+    public void run() {
         RecordsDAO dao = new RecordsDAO();
 
         //TODO Να βρώ ενα τρόπο να αυξανω την ημερομηνια κατα 1
