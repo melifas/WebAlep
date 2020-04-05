@@ -63,36 +63,6 @@ public class Application {
                     System.out.println("Επιλέξτε μια έγκυρη λειτουργία");
             }
         }
-
-      /*  try {
-            Thread dealSafariThread = new Thread(new dealSagariGr());
-            dealSafariThread.start();
-        }catch (Exception e){
-            e.getMessage();
-        }*/
-
-        /*try {
-            Thread ekdromiGr = new Thread(new ekdromiGr());
-            ekdromiGr.start();
-        }catch (Exception e){
-            e.getMessage();
-        }*/
-
-
-        /*try {
-            Thread xenodoxeioGr = new Thread(new xenodoxeioGr());
-            xenodoxeioGr.start();
-        }catch (Exception e){
-            e.getMessage();
-        }
-
-        try {
-            Thread hotelsGr = new Thread(new HotelsCom());
-            hotelsGr.start();
-        }catch (Exception e){
-            e.getMessage();
-        }*/
-
     }//τέλος main
 
         //-----------Μέθοδος εκτύπωσης διαθέσιμων λειτουργιών προς τον χρήστη--------
@@ -112,23 +82,22 @@ public class Application {
 
         //----------------------------Εκτύπωση Αποτελεσμάτων--------------------//
         public static void printResults (String city, String date) throws InterruptedException {
-
            /* ExecutorService exec = Executors.newFixedThreadPool(8);
 
             exec.execute(new ekdromiGr(city, date));
             exec.execute(new HotelsCom(city, converDate(date)));
             exec.execute(new xenodoxeioGr(city, date));
             exec.execute(new dealSagariGr(city));*/
+            String convertedDate = converDate(date);
 
-           Thread t1 = new Thread(new ekdromiGr(city, date));
-           Thread t2 = new Thread(new HotelsCom(city, date));
+            Thread t1 = new Thread(new ekdromiGr(city, date));
+            Thread t2 = new Thread(new HotelsCom(city, convertedDate));
             Thread t3 = new Thread(new xenodoxeioGr(city, date));
             Thread t4 = new Thread(new dealSagariGr(city));
             t1.start();
             t2.start();
             t3.start();
             t4.start();
-
             t1.join();
             t2.join();
             t3.join();
@@ -173,9 +142,6 @@ public class Application {
                     System.out.println("Δεν δώθηκε έγκυρη ημερομηνία");
                 }
             }
-            //System.out.println("Please give us a date");
-            //String date = input.nextLine();
-
         }
 
 //-----------------------------------Validation Ημερομηνίας---------------------------//
@@ -202,7 +168,7 @@ public class Application {
                 // create object of scanner class.
                 Scanner input=new Scanner(System.in);
                 // enter here.
-                System.out.println("\nEnter action: (6 to show available actions)");
+                System.out.println(" Παρακαλώ επιλέξτε μια ενέργεια ή πατήστε 6 για να δείτε τις διαθέσιμες επιλογές σας");
                 x=input.nextInt();
                 error=false;
             }

@@ -38,7 +38,7 @@ public class dealSagariGr implements Runnable {
                 }
                 int sum = 0;
                 System.out.println("--------------------------------------");
-                System.out.println("Αποτελέσματα απο DealSafari");
+                //System.out.println("Αποτελέσματα απο DealSafari");
                 for (int i =0; i< hotelNames.size(); i++){
                     String names = hotelNames.get(i).text().trim();
                     String priceString = hotelPrice.get(i).text().replaceAll("[^0-9]", "");
@@ -52,7 +52,7 @@ public class dealSagariGr implements Runnable {
                 //Εαν βρέθηκαν αποτελέσματα εμφανισέ τα συγκεντρωτικά αποτελέσματα καθώς και έλεγχος διαίρεσης με το μηδέν
                 if (hotelNames.size()!=0) {
                     System.out.println();
-                    System.out.println("Βρέθηκαν "+hotelNames.size()+ " ξενοδοχεία");
+                    System.out.println("Βρέθηκαν "+hotelNames.size()+ " ξενοδοχεία απο το dealSafari.gr");
                     DecimalFormat df = new DecimalFormat("0.00");
                     double averagePrice =  sum / hotelNames.size();
                     df.setMaximumFractionDigits(4);

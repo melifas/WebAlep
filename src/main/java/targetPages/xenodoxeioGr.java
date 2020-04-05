@@ -41,7 +41,7 @@ public class xenodoxeioGr implements Runnable  {
                 }
                 int sum = 0;
                 System.out.println("--------------------------------------");
-                System.out.println("Αποτελέσματα απο xenodoxeioGr");
+               // System.out.println("Αποτελέσματα απο xenodoxeioGr");
                 for (int i =0; i< hotelNames.size(); i++){
                     String names = hotelNames.get(i).text().trim();
                     //regular expression για αντικατάσταση όλων των χαρακτήρων εκτός των αριθμητικών
@@ -56,7 +56,7 @@ public class xenodoxeioGr implements Runnable  {
                 //Εαν βρέθηκαν αποτελέσματα εμφανισέ τα συγκεντρωτικά αποτελέσματα καθώς και έλεγχος διαίρεσης με το μηδέν
                 if (hotelNames.size()!=0) {
                     System.out.println();
-                    System.out.println("Βρέθηκαν "+hotelNames.size()+ " ξενοδοχεία");
+                    System.out.println("Βρέθηκαν "+hotelNames.size()+ " ξενοδοχεία απο το xenodoxeio.gr");
                     DecimalFormat df = new DecimalFormat("0.00");
                     double averagePrice =  sum / hotelNames.size();
                     df.setMaximumFractionDigits(4);

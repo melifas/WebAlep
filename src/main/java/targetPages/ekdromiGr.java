@@ -49,7 +49,7 @@ public class ekdromiGr implements Runnable{
                     System.out.println("Πρόβλημα σύνδεσης με την Βάση δεδομένων");
                 }
                 int sum = 0;
-                System.out.println("Αποτελέσματα απο EkdromiGr");
+                //System.out.println("Αποτελέσματα απο EkdromiGr");
                 for (int i =0; i< hotelNames.size(); i++){
                     String names = hotelNames.get(i).text().trim();
                     //regular expression για αντικατάσταση όλων των χαρακτήρων εκτός των αριθμητικών
@@ -64,7 +64,7 @@ public class ekdromiGr implements Runnable{
                 //Εαν βρέθηκαν αποτελέσματα εμφανισέ τα συγκεντρωτικά αποτελέσματα καθώς και έλεγχος διαίρεσης με το μηδέν
                 if (hotelNames.size()!=0) {
                     System.out.println();
-                    System.out.println("Βρέθηκαν "+hotelNames.size()+ " ξενοδοχεία");
+                    System.out.println("Βρέθηκαν "+hotelNames.size()+ " ξενοδοχεία απο το Ekdromi.gr");
                     DecimalFormat df = new DecimalFormat("0.00");
                     double averagePrice =  sum / hotelNames.size();
                     df.setMaximumFractionDigits(4);

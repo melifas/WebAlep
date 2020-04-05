@@ -47,7 +47,7 @@ public class HotelsCom implements Runnable  {
                 int sum = 0;
                 //Elements hotelRates = page.select("strong.guest-reviews-badge");
                 System.out.println("--------------------------------------");
-                System.out.println("Αποτελέσματα απο HotelGr");
+                //System.out.println("Αποτελέσματα απο HotelGr");
                 for (int i =0; i< hotelPricelink.size(); i++){
                     String names = hotelNames.get(i).text().trim();
                     String priceString = hotelPricelink.get(i).text();
@@ -72,7 +72,7 @@ public class HotelsCom implements Runnable  {
                 //Εαν βρέθηκαν αποτελέσματα εμφανισέ τα συγκεντρωτικά αποτελέσματα καθώς και έλεγχος διαίρεσης με το μηδέν
                 if (hotelNames.size()!=0) {
                     System.out.println();
-                    System.out.println("Βρέθηκαν "+hotelNames.size()+ " ξενοδοχεία");
+                    System.out.println("Βρέθηκαν "+hotelNames.size()+ " ξενοδοχεία απο το Hotels.com");
                     DecimalFormat df = new DecimalFormat("0.00");
                     double averagePrice =  sum / hotelNames.size();
                     df.setMaximumFractionDigits(4);
@@ -86,22 +86,58 @@ public class HotelsCom implements Runnable  {
         }
     }
     //Το site θέλει στο url αρχική ημερομηνία(την οποία μας δίνει ο χρήστης). Για να μας παρουσιάσει αποτελέσματα θέλει και τελική ημερομηνία η οποία by Default είναι μια ημέρα μεγαλύτερη.
-    //Η μέθοδος αυτή απλά αυξάνει την ημερομηνία κατά 1 για να μπει στο url.
-    public String  increasDateByOne(String startdate){
-        Character last = startdate.charAt(9);
-        //Κάντο int και αύξησε το κατά 1
-        Integer convert =Character.getNumericValue(last);
-        Integer incremented = convert+1;
+    //Η μέθοδος αυτή απλά αυξάνει την ημερομηνία κατά 1 για να μπει στο url. Τώρα επειδή ο χρήστης επιτέπεται να βάλει π.χ 4/4/2020 ή 4/04/2020 ή 04/04/2020 εξετάζω 3 περιπτώσεις
+    public String  increasDateByOne(String date){
+        if (date.length()==9){
+            Character last = date.charAt(9);
+            //Κάντο int και αύξησε το κατά 1
+            Integer convert =Character.getNumericValue(last);
+            Integer incremented = convert+1;
 
-        //Κάνε το int σε String
-        String  myString = String.valueOf(incremented);
-        //Κάνε το String Char
-        Character lastChar = myString.charAt(0);
+            //Κάνε το int σε String
+            String  myString = String.valueOf(incremented);
+            //Κάνε το String Char
+            Character lastChar = myString.charAt(0);
 
-        //Αντικατέστησε την θέση με το συγκεκριμένο index με τον χαρακτήρα
-        StringBuilder sb = new StringBuilder(startdate);
-        sb.setCharAt(9,lastChar);
-        return sb.toString();
+            //Αντικατέστησε την θέση με το συγκεκριμένο index με τον χαρακτήρα
+            StringBuilder sb = new StringBuilder(date);
+            sb.setCharAt(9,lastChar);
+            return sb.toString();
+        }else if (date.length()==8){
+            Character last = date.charAt(8);
+            //Κάντο int και αύξησε το κατά 1
+            Integer convert =Character.getNumericValue(last);
+            Integer incremented = convert+1;
+
+            //Κάνε το int σε String
+            String  myString = String.valueOf(incremented);
+            //Κάνε το String Char
+            Character lastChar = myString.charAt(0);
+
+            //Αντικατέστησε την θέση με το συγκεκριμένο index με τον χαρακτήρα
+            StringBuilder sb = new StringBuilder(date);
+            sb.setCharAt(8,lastChar);
+            return sb.toString();
+        }else if (date.length()==7){
+            Character last = date.charAt(7);
+            //Κάντο int και αύξησε το κατά 1
+            Integer convert =Character.getNumericValue(last);
+            Integer incremented = convert+1;
+
+            //Κάνε το int σε String
+            String  myString = String.valueOf(incremented);
+            //Κάνε το String Char
+            Character lastChar = myString.charAt(0);
+
+            //Αντικατέστησε την θέση με το συγκεκριμένο index με τον χαρακτήρα
+            StringBuilder sb = new StringBuilder(date);
+            sb.setCharAt(7,lastChar);
+            return sb.toString();
+        }
+        else {
+            return  null;
+        }
+
     }
 
 
