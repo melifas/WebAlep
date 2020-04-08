@@ -28,21 +28,20 @@ public class Application {
         printActions();
         while (!quit) {
             //System.out.println("\nEnter action: (6 to show available actions)");
-            int action = readInt();
+            //int action = readInt();
+            System.out.println("\nEnter action: (6 to show available actions)");
+            int action = input.nextInt();
+            input.nextLine();
             switch (action) {
                 case 0:
                     System.out.println("\nΈξοδος...");
                     quit = true;
                     break;
                 case 1:
-                    prompt ();
-                    System.out.println("Συνολικός αριθμός δωματίων απο scrapping ");
-                    System.out.println(dao.countRecords());
-                    System.out.println("Μέση συνολική τιμή δωματίων");
-                    System.out.println(dao.AveragePrice());
+                    prompt();
                     break;
                 case 2:
-                    //addProduct();
+                    statisticsFromDb();
                     break;
                 case 3:
                     //searchProductById();
@@ -80,15 +79,24 @@ public class Application {
             //System.out.println("Choose your action: \n");
         }
 
+        public  static void statisticsFromDb(){
+            System.out.println("Συνολικός αριθμός δωματίων απο scrapping ");
+            System.out.println(dao.countRecords());
+            System.out.println("Μέση συνολική τιμή δωματίων");
+            System.out.println(dao.AveragePrice());
+        }
         //----------------------------Εκτύπωση Αποτελεσμάτων--------------------//
         public static void printResults (String city, String date) throws InterruptedException {
-           /* ExecutorService exec = Executors.newFixedThreadPool(8);
 
+           ExecutorService exec = Executors.newFixedThreadPool(8);
             exec.execute(new ekdromiGr(city, date));
             exec.execute(new HotelsCom(city, converDate(date)));
             exec.execute(new xenodoxeioGr(city, date));
-            exec.execute(new dealSagariGr(city));*/
-            String convertedDate = converDate(date);
+            exec.execute(new dealSagariGr(city));
+
+            exec.shutdown();
+
+           /* String convertedDate = converDate(date);
 
             Thread t1 = new Thread(new ekdromiGr(city, date));
             Thread t2 = new Thread(new HotelsCom(city, convertedDate));
@@ -101,9 +109,14 @@ public class Application {
             t1.join();
             t2.join();
             t3.join();
-            t4.join();
+            t4.join();*/
 
         }
+
+
+
+
+
     //-------------------------Eπειδή κάποιες Ιστοσελίδες χρειάζονται ημερομηνία σε διαφορετικό format έφτιαξα αυτή την μέθοδο-------------------
         public static String converDate(String date){
             SimpleDateFormat input = new SimpleDateFormat("dd/MM/yyy");
@@ -142,6 +155,18 @@ public class Application {
                     System.out.println("Δεν δώθηκε έγκυρη ημερομηνία");
                 }
             }
+
+            /*while (!isOk){
+                System.out.println("Παρακαλώ δώστε ημερονηνία σε μορφή dd/MM/yyyy");
+                String date = input.nextLine();
+                if (validationDate(date)){
+                    return true;
+                }*//*else{
+                    System.out.println("Δεν δώθηκε έγκυρη ημερομηνία");
+                }*//*
+                break;
+            }
+            return false;*/
         }
 
 //-----------------------------------Validation Ημερομηνίας---------------------------//
@@ -157,7 +182,7 @@ public class Application {
         }
     }
     //----------------------------------------------------------------------------- //
-    public static int readInt()
+   /* public static int readInt()
     {
         boolean error=false;
         int x=0;
@@ -181,7 +206,7 @@ public class Application {
         }
         while(error);
         return(x);
-    }
+    }*/
     //-----------------------------------------------------------------------------------//
 }
 

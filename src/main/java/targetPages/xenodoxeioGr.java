@@ -34,7 +34,7 @@ public class xenodoxeioGr implements Runnable  {
                 Elements hotelNames = page.getElementsByClass("main-deal-hotel-name");
                 Elements hotelPrice = page.getElementsByClass("main-deal-final-price palette-light");
                 //Έλεγχος σύνσεση με την βάσξ δεδομένων
-                if(DbUtil.connect()!=null){
+                if(DbUtil.getConn()!=null){
                     System.out.println("Επιτυχής Σύνδεση με την Βάση");
                 }else{
                     System.out.println("Πρόβλημα σύνδεσης με την Βάση δεδομένων");

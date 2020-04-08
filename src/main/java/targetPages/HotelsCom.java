@@ -10,11 +10,14 @@ import pojo.Records;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.sql.Connection;
 import java.text.DecimalFormat;
 
 public class HotelsCom implements Runnable  {
     private String city;
     private String date;
+
+
 
     public HotelsCom(String city, String date) {
         this.city = city;
@@ -23,6 +26,7 @@ public class HotelsCom implements Runnable  {
 
     public void run() {
         RecordsDAO dao = new RecordsDAO();
+
 
         //TODO Να βρώ ενα τρόπο να αυξανω την ημερομηνια κατα 1
          String enddate = increasDateByOne(date);
@@ -39,7 +43,7 @@ public class HotelsCom implements Runnable  {
                 Elements hotelNames = page.getElementsByClass("property-name-link");
                 Elements hotelPricelink = page.select("div.price");
                 //Έλεγχος σύνσεση με την βάσξ δεδομένων
-                if(DbUtil.connect()!=null){
+                if(DbUtil.getConn()!=null){
                     System.out.println("Επιτυχής Σύνδεση με την Βάση");
                 }else{
                     System.out.println("Πρόβλημα σύνδεσης με την Βάση δεδομένων");
@@ -81,7 +85,7 @@ public class HotelsCom implements Runnable  {
                     System.out.println("Κανένα αποτέλεσμα δεν επεστράφει απο hotel.gr. Δοκιμάστε διαφορετικά κριτήρια αναζήτησης ή προσπαθείστε ξανά");
                 }
             } catch (Exception e) {
-                System.out.println("Ενδέχεται κάποια αποτελέσματα να μην επεστράφησαν");
+                System.out.println("Ενδέχεται κάποια αποτελέσματα να μην επεστράφησαν απο το Hotel.gr");
             }
         }
     }

@@ -4,6 +4,7 @@ import DbUtil.DbUtil;
 import pojo.Records;
 
 import java.sql.*;
+import java.util.function.DoubleBinaryOperator;
 
 public class RecordsDAO {
 
@@ -15,12 +16,12 @@ public class RecordsDAO {
         String sql = "INSERT INTO results(hotelnames,hotelprices) VALUES(?,?)";
         //String url = "jdbc:sqlite:web.db";
         try {
-            Connection conn = DbUtil.connect();
+            Connection conn = DbUtil.getConn();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, records.getHotelnames());
             ps.setDouble(2, records.getHotelprices());
             status = ps.executeUpdate();
-
+            DbUtil.closeConnection(conn);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -54,9 +55,10 @@ public class RecordsDAO {
         String sql = "DROP TABLE results";
 
         try {
-            Connection conn = DbUtil.connect();
+            Connection conn = DbUtil.getConn();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.execute();
+            DbUtil.closeConnection(conn);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -66,9 +68,10 @@ public class RecordsDAO {
 
         String sql1 = "CREATE TABLE results( Id INTEGER PRIMARY KEY, hotelnames VARCHAR, hotelprices DOUBLE)";
         try {
-            Connection conn = DbUtil.connect();
+            Connection conn = DbUtil.getConn();
             PreparedStatement ps = conn.prepareStatement(sql1);
             ps.execute();
+            DbUtil.closeConnection(conn);
         } catch (Exception e) {
             e.getMessage();
         }
@@ -78,7 +81,7 @@ public class RecordsDAO {
     public int countRecords(){
         int counter = 0;
         try {
-            Connection connection = DbUtil.connect();
+            Connection connection = DbUtil.getConn();
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM results");
 
@@ -96,7 +99,7 @@ public class RecordsDAO {
     //-----------------------------------sql for finding the average price of hotels-------//
     public float AveragePrice(){
         try {
-            Connection connection = DbUtil.connect();
+            Connection connection = DbUtil.getConn();
 
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery("SELECT Avg(hotelprices) As average FROM results");

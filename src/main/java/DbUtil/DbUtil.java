@@ -4,9 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+//θα πρέπει να προσπαθήσω να την κάνω singleton
 public class DbUtil {
 
-    public static synchronized Connection connect() {
+    private static  volatile Connection conn = null;
+
+
+   /* public static Connection getConn() {
         Connection conn = null;
         try {
             // db parameters
@@ -18,8 +22,38 @@ public class DbUtil {
             System.out.println(e.getMessage());
         }
         return conn;
+    }*/
+
+    //νεα thread safe connection
+    public static Connection getConn() {
+        Connection conn = null;
+        if (conn==null){
+            synchronized (DbUtil.class){
+                if (conn==null){
+                    try {
+                        // db parameters
+                        String url = "jdbc:sqlite:web.db";
+                        // create a connection to the database
+                        conn = DriverManager.getConnection(url);
+                        //System.out.println("Επιτυχής Σύνδεση με την Βάση");
+                    } catch (SQLException e) {
+                        System.out.println(e.getMessage());
+                    }/*finally {
+                        try {
+                            if (conn != null) {
+                                conn.close();
+                            }
+                        } catch (SQLException ex) {
+                            System.out.println(ex.getMessage());
+                        }
+                    }*/
+                }
+            }
+        }
+        return conn;
     }
-    public static void  closeConnection(Connection c){
+
+    public static synchronized void  closeConnection(Connection c){
         try {
             c.close();
         } catch (SQLException e) {

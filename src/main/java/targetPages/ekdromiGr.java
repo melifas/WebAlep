@@ -43,7 +43,7 @@ public class ekdromiGr implements Runnable{
                 Elements hotelNames = page.getElementsByClass("list_deal_title");
                 Elements hotelPrice = page.getElementsByClass("price");
                 //Έλεγχος σύνσεση με την βάσξ δεδομένων
-                if(DbUtil.connect()!=null){
+                if(DbUtil.getConn()!=null){
                     System.out.println("Επιτυχής Σύνδεση με την Βάση");
                 }else{
                     System.out.println("Πρόβλημα σύνδεσης με την Βάση δεδομένων");

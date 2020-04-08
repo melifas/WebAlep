@@ -31,7 +31,7 @@ public class dealSagariGr implements Runnable {
                 Elements hotelNames = page.select("div.list-deal-company-name");
                 Elements hotelPrice = page.select("span.list-deal-final-price");
                 //Έλεγχος σύνσεση με την βάσξ δεδομένων
-                if(DbUtil.connect()!=null){
+                if(DbUtil.getConn()!=null){
                     System.out.println("Επιτυχής Σύνδεση με την Βάση");
                 }else{
                     System.out.println("Πρόβλημα σύνδεσης με την Βάση δεδομένων");
