@@ -28,11 +28,10 @@ public class Application {
         boolean quit = false;
         printActions();
         while (!quit) {
-            //System.out.println("\nEnter action: (6 to show available actions)");
-            //int action = readInt();
             System.out.println("\nΠληκτρολογίστε ενα αριθμό απο το 1-6: (6 για να δέιτε τις επιλογές σας)");
-            int action = input.nextInt();
-            input.nextLine();
+            int action = readInt();
+            //System.out.println("\nΠληκτρολογίστε ενα αριθμό απο το 1-6: (6 για να δέιτε τις επιλογές σας)");
+            //int action = input.nextInt();
             switch (action) {
                 case 0:
                     System.out.println("\nΈξοδος...");
@@ -45,7 +44,8 @@ public class Application {
                     statisticsFromDb();
                     break;
                 case 3:
-                    //searchProductById();
+                    testHotels ts = new testHotels();
+                    ts.print();
                     break;
                 case 4:
                     //addManyProducts();
@@ -91,7 +91,8 @@ public class Application {
 
            ExecutorService exec = Executors.newFixedThreadPool(8);
 
-            exec.execute(new HotelsCom(city, converDate(date)));
+           String converted = converDate(date);
+            exec.execute(new HotelsCom(city, converted));
             exec.execute(new xenodoxeioGr(city, date));
             exec.execute(new dealSagariGr(city));
             exec.execute(new ekdromiGr(city, date));
@@ -145,7 +146,6 @@ public class Application {
             Scanner input = new Scanner(System.in);
             System.out.println("Παρακαλώ δώστε πόλη αναζήτησης");
             String city = input.nextLine();
-
             Boolean isOk = false;
             while (!isOk){
                 System.out.println("Παρακαλώ δώστε ημερονηνία σε μορφή dd/MM/yyyy");
@@ -189,7 +189,7 @@ public class Application {
         }
     }
     //----------------------------------------------------------------------------- //
-   /* public static int readInt()
+    public static int readInt()
     {
         boolean error=false;
         int x=0;
@@ -200,7 +200,7 @@ public class Application {
                 // create object of scanner class.
                 Scanner input=new Scanner(System.in);
                 // enter here.
-                System.out.println(" Παρακαλώ επιλέξτε μια ενέργεια ή πατήστε 6 για να δείτε τις διαθέσιμες επιλογές σας");
+               // System.out.println(" Παρακαλώ επιλέξτε μια ενέργεια ή πατήστε 6 για να δείτε τις διαθέσιμες επιλογές σας");
                 x=input.nextInt();
                 error=false;
             }
@@ -213,7 +213,7 @@ public class Application {
         }
         while(error);
         return(x);
-    }*/
+    }
     //-----------------------------------------------------------------------------------//
 }
 
