@@ -13,6 +13,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class Application {
 
@@ -29,7 +30,7 @@ public class Application {
         while (!quit) {
             //System.out.println("\nEnter action: (6 to show available actions)");
             //int action = readInt();
-            System.out.println("\nEnter action: (6 to show available actions)");
+            System.out.println("\nΠληκτρολογίστε ενα αριθμό απο το 1-6: (6 για να δέιτε τις επιλογές σας)");
             int action = input.nextInt();
             input.nextLine();
             switch (action) {
@@ -74,7 +75,7 @@ public class Application {
                     "4  - to add many products in block chain\n" +
                     "5  - to search for a product by its code\n" +
                     "6  - to print a list of available actions\n" +
-                    "7  - to view time statistics of a product\n"
+                    "7  - to view time statistics of a product"
             );
             //System.out.println("Choose your action: \n");
         }
@@ -89,12 +90,18 @@ public class Application {
         public static void printResults (String city, String date) throws InterruptedException {
 
            ExecutorService exec = Executors.newFixedThreadPool(8);
-            exec.execute(new ekdromiGr(city, date));
+
             exec.execute(new HotelsCom(city, converDate(date)));
             exec.execute(new xenodoxeioGr(city, date));
             exec.execute(new dealSagariGr(city));
+            exec.execute(new ekdromiGr(city, date));
 
             exec.shutdown();
+            try {
+                exec.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
            /* String convertedDate = converDate(date);
 

@@ -24,7 +24,7 @@ public class DbUtil {
         return conn;
     }*/
 
-    //νεα thread safe connection
+    //νεα thread safe connection με singleton Pattern
     public static Connection getConn() {
         Connection conn = null;
         if (conn==null){
@@ -38,15 +38,7 @@ public class DbUtil {
                         //System.out.println("Επιτυχής Σύνδεση με την Βάση");
                     } catch (SQLException e) {
                         System.out.println(e.getMessage());
-                    }/*finally {
-                        try {
-                            if (conn != null) {
-                                conn.close();
-                            }
-                        } catch (SQLException ex) {
-                            System.out.println(ex.getMessage());
-                        }
-                    }*/
+                    }
                 }
             }
         }
