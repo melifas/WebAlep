@@ -5,6 +5,9 @@ import dao.RecordsDAO;
 import org.w3c.dom.ls.LSOutput;
 import targetPages.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,8 +47,7 @@ public class Application {
                     statisticsFromDb();
                     break;
                 case 3:
-                    testHotels ts = new testHotels();
-                    ts.print();
+                    killThreads();
                     break;
                 case 4:
                     //addManyProducts();
@@ -99,6 +101,7 @@ public class Application {
 
             exec.shutdown();
             try {
+
                 exec.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -121,8 +124,43 @@ public class Application {
 
         }
 
+        public static void test() {
+            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+            String line = "";
 
 
+            while (line.equalsIgnoreCase("quit") == false) {
+                try {
+                    line = in.readLine();
+                    //Εδω αυτο που θέλω να εκτελέστει
+                    killThreads();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                //do something
+            }
+
+            try {
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+        public static void killThreads(){
+            ekdromiGr ek = new ekdromiGr();
+            HotelsCom ht = new HotelsCom();
+            xenodoxeioGr xe = new xenodoxeioGr();
+            dealSagariGr de = new dealSagariGr();
+            ek.stop();
+            ht.stop();
+            xe.stop();
+            de.stop();
+        }
 
 
     //-------------------------Eπειδή κάποιες Ιστοσελίδες χρειάζονται ημερομηνία σε διαφορετικό format έφτιαξα αυτή την μέθοδο-------------------
