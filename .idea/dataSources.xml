@@ -7,5 +7,11 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\melifas\IdeaProjects\WebAlep\web.db</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="SQLite - identifier.sqlite" uuid="fe586e8f-cd32-467f-b99a-dd3b0d7211ec">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:identifier.sqlite</jdbc-url>
+    </data-source>
   </component>
 </project>

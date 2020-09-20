@@ -27,7 +27,7 @@ public class RecordsDAO {
         return status;
     }
 
-    //---------------------Create Table----------------------
+    //---------------------Create Table(εφτιαξα άλλη που χρησιμοποιώ παρακάτω)----------------------
     public  void createNewTable(String tablename) {
         // SQLite connection string
         String url = "jdbc:sqlite:web.db";
