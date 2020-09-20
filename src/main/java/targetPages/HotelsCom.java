@@ -23,7 +23,7 @@ public class HotelsCom  {
         Document page;
         {
             try {
-                page = Jsoup.connect("https://el.hotels.com/search.do?q-destination=" + URLEncoder.encode(city,"UTF-8")+"&q-check-in="+ URLEncoder.encode(enddate,"UTF-8")
+                page = Jsoup.connect("https://el.hotels.com/search.do?q-destination=" + URLEncoder.encode(city,"UTF-8")+"&q-check-in="+ URLEncoder.encode(date,"UTF-8")
                         +"&q-check-out"+URLEncoder.encode(enddate,"UTF-8")+"&q-rooms=1&q-room-0-adults=1&q-room-0-children=0"
                 ).get();
 
