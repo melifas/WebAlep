@@ -45,6 +45,7 @@ public class HotelsCom  {
                     String names = hotelNames.get(i).text().trim();
                     String priceString = hotelPricelink.get(i).text();
                     if (priceString.length()>7){
+                        //Αν το επιστρφόμενο ξεπερνά τους 7 χαρακτήρες ξεκίνα απο τον 7 μέχρι το τέλος
                         String pricenotready = priceString.substring(7);
                         //Αφαίρεση με regex όλων των χαρακτήρων εκτός αριθμούς
                         String priceready = pricenotready.replaceAll("[^0-9]", "");
